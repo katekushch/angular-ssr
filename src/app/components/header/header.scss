@@ -1,0 +1,17 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f0f0f0;
+
+    .logo {
+        cursor: pointer;
+    }
+
+    ul {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+    }
+}
