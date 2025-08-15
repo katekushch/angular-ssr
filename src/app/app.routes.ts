@@ -13,23 +13,23 @@ export const routes: Routes = [{
 },
 {
     path: 'home',
-    component: HomeComponent
+    loadComponent: () => import('./home/home').then(m => m.HomeComponent)
 },
 {
     path: 'about',
-    component: AboutComponent
+    loadComponent: () => import('./about/about').then(m => m.AboutComponent)
 },
 {
     path: 'contact',
-    component: ContactComponent
+    loadComponent: () => import('./contact/contact').then(m => m.ContactComponent)
 },
 {
     path: 'how-it-works',
-    component: HowItWorksComponent
+    loadComponent: () => import('./how-it-works/how-it-works').then(m => m.HowItWorksComponent)
 },
 {
     path: 'terms',
-    component: TermsComponent
+    loadComponent: () => import('./terms/terms').then(m => m.TermsComponent)
 },
 {
     path: '**',
