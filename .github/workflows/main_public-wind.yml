@@ -31,6 +31,9 @@ jobs:
           npm install
           npm run build
 
+      - name: Prepare runtime package.json
+        run: Copy-Item -Path .\package.runtime.json -Destination .\package.json
+
       # Zip exactly what Windows App Service needs
       - name: Create deploy zip (dist + web.config + server.js)
         run: |
