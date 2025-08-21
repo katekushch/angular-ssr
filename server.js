@@ -1,0 +1,1 @@
+import('./dist/public/server/server.mjs'); // Replace with your project name
