@@ -18,24 +18,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
+      - name: Use Node 20 (Angular 20 compatible)
+        uses: actions/setup-node@v4
         with:
           node-version: '^22.11.0'
+
+      - name: Install deps
+        run: npm ci
 
       - name: npm install, build, and test
         run: |
           npm install
           npm run build
+
+      # Zip exactly what Windows App Service needs
+      - name: Create deploy zip (dist + web.config + server.js)
+        run: |
+          if (Test-Path deploy.zip) { Remove-Item deploy.zip }
+          Compress-Archive -Path .\dist, .\web.config, .\server.js -DestinationPath deploy.zip
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: .
+          name: angular-ssr-build
+          path: deploy.zip
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     permissions:
       id-token: write #This is required for requesting the JWT
@@ -45,7 +54,8 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: angular-ssr-build
+          path: .
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -60,5 +70,5 @@ jobs:
         with:
           app-name: 'public-wind'
           slot-name: 'Production'
-          package: .
+          package: "deploy.zip"
           
