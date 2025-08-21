@@ -24,7 +24,9 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "web.config",
+              "server.js"
             ],
             "styles": [
               "src/styles.scss"
@@ -83,7 +85,9 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "web.config",
+              "server.js"
             ],
             "styles": [
               "src/styles.scss"
