@@ -38,7 +38,7 @@ jobs:
       - name: Create deploy zip (dist + web.config + server.js)
         run: |
           if (Test-Path deploy.zip) { Remove-Item deploy.zip }
-          Compress-Archive -Path .\dist, .\web.config, .\server.js -DestinationPath deploy.zip
+          Compress-Archive -Path .\dist, .\web.config, .\server.js, .\package.json -DestinationPath deploy.zip
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
