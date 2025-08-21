@@ -7,7 +7,6 @@
     "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:ssr": "ng build && ng run public:server",
     "serve:ssr:public": "node dist/public/server/server.mjs"
   },
   "prettier": {
